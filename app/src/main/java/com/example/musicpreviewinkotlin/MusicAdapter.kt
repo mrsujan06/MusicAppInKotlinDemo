@@ -1,5 +1,8 @@
 package com.example.musicpreviewinkotlin
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
+
 
 class MusicAdapter : RecyclerView.Adapter<MusicAdapter.MusicAdapterViewHolder>() {
 
@@ -37,18 +41,31 @@ class MusicAdapter : RecyclerView.Adapter<MusicAdapter.MusicAdapterViewHolder>()
 
     inner class MusicAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
-        val album_name: TextView = itemView.findViewById(R.id.album_name)
-        val song_name: TextView = itemView.findViewById(R.id.song_name)
-        val artist_photo: ImageView = itemView.findViewById(R.id.artist_photo)
+        private val albumName: TextView = itemView.findViewById(R.id.album_name)
+        private val songName: TextView = itemView.findViewById(R.id.song_name)
+        private val artistPhoto: ImageView = itemView.findViewById(R.id.artist_photo)
+        private var context: Context = itemView.context
+
+        init {
+            itemView.setOnClickListener(this)
+        }
 
         fun bindModel(music: Result) {
-            album_name.text = music.artistName
-            song_name.text = music.collectionName
-            Picasso.get().load(music.artworkUrl100).into(artist_photo)
+            albumName.text = music.artistName
+            songName.text = music.collectionName
+            Picasso.get().load(music.artworkUrl100).into(artistPhoto)
         }
 
         override fun onClick(v: View?) {
-            println("Clicked")
+            playMusic(music[adapterPosition].previewUrl)
         }
+
+        private fun playMusic(url: String) {
+            val uri = Uri.parse(url)
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            intent.setDataAndType(uri, "audio/mpeg3")
+            context.startActivity(intent)
+        }
+
     }
 }

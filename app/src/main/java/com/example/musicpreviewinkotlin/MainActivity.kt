@@ -6,13 +6,14 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.widget.Toast
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MainActivity : AppCompatActivity() {
+ class MainActivity : AppCompatActivity() {
 
     private lateinit var musicAdapter: MusicAdapter
 
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
 
-        val apiMusic = retrofit.create(MusicApiInterface::class.java)
+        val apiMusic: MusicApiInterface = retrofit.create(MusicApiInterface::class.java)
 
         apiMusic.getMusic()
             .subscribeOn(Schedulers.io())
@@ -39,9 +40,10 @@ class MainActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 musicAdapter.setMusic(it.results)
-            }, {
-                Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
-            })
+            },
+                {
+                    Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
+                })
     }
 
 }
