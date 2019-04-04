@@ -1,4 +1,4 @@
-package com.example.musicpreviewinkotlin
+package com.example.musicpreviewinkotlin.model.data
 
 data class Result(
 

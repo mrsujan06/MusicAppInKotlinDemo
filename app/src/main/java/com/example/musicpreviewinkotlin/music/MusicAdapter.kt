@@ -1,4 +1,4 @@
-package com.example.musicpreviewinkotlin
+package com.example.musicpreviewinkotlin.music
 
 import android.content.Context
 import android.content.Intent
@@ -9,8 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.musicpreviewinkotlin.R
+import com.example.musicpreviewinkotlin.model.data.Result
 import com.squareup.picasso.Picasso
-
+import kotlinx.android.synthetic.main.music_list_layout.view.*
 
 class MusicAdapter : RecyclerView.Adapter<MusicAdapter.MusicAdapterViewHolder>() {
 
@@ -41,9 +43,9 @@ class MusicAdapter : RecyclerView.Adapter<MusicAdapter.MusicAdapterViewHolder>()
 
     inner class MusicAdapterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
-        private val albumName: TextView = itemView.findViewById(R.id.album_name)
-        private val songName: TextView = itemView.findViewById(R.id.song_name)
-        private val artistPhoto: ImageView = itemView.findViewById(R.id.artist_photo)
+        private val albumName: TextView = itemView.album_name
+        private val songName: TextView = itemView.song_name
+        private val artistPhoto: ImageView = itemView.artist_photo
         private var context: Context = itemView.context
 
         init {
@@ -66,6 +68,5 @@ class MusicAdapter : RecyclerView.Adapter<MusicAdapter.MusicAdapterViewHolder>()
             intent.setDataAndType(uri, "audio/mpeg3")
             context.startActivity(intent)
         }
-
     }
 }
