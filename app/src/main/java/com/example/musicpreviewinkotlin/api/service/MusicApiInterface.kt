@@ -1,5 +1,6 @@
-package com.example.musicpreviewinkotlin
+package com.example.musicpreviewinkotlin.api.service
 
+import com.example.musicpreviewinkotlin.model.MusicResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 
