@@ -36,7 +36,7 @@ class MusicActivity : AppCompatActivity(), MusicView {
     fun getPresenter(musicPresenter: MusicPresenter) {
         this.presenter = musicPresenter
     }
-
+  
     private fun getMusic() {
         presenter.getMusic()
     }
