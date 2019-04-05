@@ -27,7 +27,7 @@ class MusicPresenter @Inject constructor(private var musicInteractor: MusicApiIn
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    view?.OnFetchDataSuccess(it.results)
+                    view?.onFetchDataSuccess(it.results)
                 },
                 {
                     Log.d("errorInPresenter ->", "Error While Fetching data. ${it.localizedMessage}")

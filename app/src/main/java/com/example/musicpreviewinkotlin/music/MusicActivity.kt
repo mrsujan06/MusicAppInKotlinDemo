@@ -27,7 +27,7 @@ class MusicActivity : AppCompatActivity(), MusicView {
         getMusic()
     }
 
-    fun initRecyclerView() {
+    private fun initRecyclerView() {
         music_recyclerview.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         music_recyclerview.adapter = musicAdapter
     }
@@ -36,12 +36,12 @@ class MusicActivity : AppCompatActivity(), MusicView {
     fun getPresenter(musicPresenter: MusicPresenter) {
         this.presenter = musicPresenter
     }
-
-    fun getMusic() {
+  
+    private fun getMusic() {
         presenter.getMusic()
     }
 
-    override fun OnFetchDataSuccess(musicList: List<Result>) {
+    override fun onFetchDataSuccess(musicList: List<Result>) {
         musicAdapter.setMusic(musicList)
     }
 

@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MusicApiInteractorImp : MusicApiInteractor {
 
-    val apiMusic: MusicApiInterface
+    private val apiMusic: MusicApiInterface
 
     init {
         val retrofit: Retrofit = Retrofit.Builder()
